@@ -62,6 +62,7 @@ public class PerroController extends HttpServlet {
 		String mensaje = "";
 		
 		//recibri datos del formulario, fijaros en el input el atributo 'name'
+		int id = Integer.parseInt(request.getParameter("id"));
 		String nombre = request.getParameter("nombre");
 		String raza = request.getParameter("raza");
 	    float peso = Float.parseFloat(request.getParameter("peso"));
@@ -69,6 +70,7 @@ public class PerroController extends HttpServlet {
 		String historia = request.getParameter("historia");
 		
 		Perro p = new Perro();
+		p.setId(id);
 		p.setNombre(nombre);
 		p.setRaza(raza);
 		p.setPeso(peso);
@@ -77,8 +79,13 @@ public class PerroController extends HttpServlet {
 		
 		//guardarlo en la bbdd
 		try {
-			dao.crear(p);
-			mensaje = "Perro insertado con exito";
+			if ( id == 0 ) {			
+				dao.crear(p);
+				mensaje = "Perro insertado con exito";
+			}else {
+				dao.modificar(p);
+				mensaje = "Perro Modificado con exito";
+			}
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
@@ -90,7 +97,7 @@ public class PerroController extends HttpServlet {
 			request.setAttribute("perro", p);
 			request.setAttribute("mensaje", mensaje);
 			// ir a la JSP
-			request.getRequestDispatcher("perro.jsp").forward(request, response);
+			request.getRequestDispatcher("formulario.jsp").forward(request, response);
 		}	
 	}
 

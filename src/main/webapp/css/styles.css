@@ -161,7 +161,7 @@ tfoot td {
 
 .flex {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .boton {   
@@ -184,6 +184,10 @@ tfoot td {
   transition: 1s;
   color: var(--color-white);
   background-color: var(--color-accent);
+}
+
+.w-7 {
+	width: 7% !important;
 }
 
 
